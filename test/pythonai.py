@@ -34,10 +34,10 @@ class FactMOD:
         else:
             raise ValueError(f"Model '{mod}' not recognized!")
 
-def LOADDATA(file_name):
-    return pd.read_excel('C:\\Users\\Mkbv2\\OneDrive\\Documents\\python_ai_assessment\\Net_Worth_Data.xlsx')
+def LOADingDATA(file_name):
+    return pd.read_excel('C:\\Users\\Mkbv2\\OneDrive\\Documents\\python_ai_assessment\\test\\Net_Worth_Data.xlsx')
 
-def OLD_DATA(DATA):
+def DATAOLD(DATA):
 # Check for missing values
     if DATA.isnull().any().any():
         raise ValueError("The data contains missing values. Please ensure the data is cleaned before processing.")
@@ -54,7 +54,7 @@ def OLD_DATA(DATA):
     
     return X_S, Y_S, MINMAXSCALE, MINMAX1
 
-def DATASplit(X_S, Y_S):
+def DATASPLITING(X_S, Y_S):
     return train_test_split(X_S, Y_S, test_size=0.2, random_state=42)
 
 def Train_MODS(Training_X, Training_Y):
@@ -128,9 +128,9 @@ def NEW_DATA_PREDICT(LOADED_MOD, MINMAXSCALE, MINMAX1):
 
 if __name__ == "__main__":
     try: #add try except to handle missing value error
-        DATA = LOADDATA('C:\\Users\\Mkbv2\\OneDrive\\Documents\\python_ai_assessment\\Net_Worth_Data.xlsx')
-        X_S, Y_S, MINMAXSCALE, MINMAX1 = OLD_DATA(DATA)
-        Training_X, test_X, Training_Y, test_Y = DATASplit(X_S, Y_S)
+        DATA = LOADingDATA('C:\\Users\\Mkbv2\\OneDrive\\Documents\\python_ai_assessment\\test\\Net_Worth_Data.xlsx')
+        X_S, Y_S, MINMAXSCALE, MINMAX1 = DATAOLD(DATA)
+        Training_X, test_X, Training_Y, test_Y = DATASPLITING(X_S, Y_S)
         MODS = Train_MODS(Training_X, Training_Y)
         rmsev = evaluate_MODS(MODS, test_X, test_Y)
         PLOT_MOD_PERFORMANCE(rmsev)
